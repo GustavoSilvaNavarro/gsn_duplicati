@@ -1,0 +1,5 @@
+.vscode/settings.json
+backups/
+config/
+.qodo
+.DS_Store

@@ -1,0 +1,17 @@
+services:
+  duplicati:
+    image: lscr.io/linuxserver/duplicati:latest
+    container_name: duplicati
+    restart: unless-stopped
+    environment:
+      - PUID=0
+      - PGID=0
+      - TZ=America/New_York
+      - SETTINGS_ENCRYPTION_KEY=superSecretPasswordShhhhh
+      - DUPLICATI__WEBSERVICE_PASSWORD=password
+    volumes:
+      - ./config:/config
+      - ./backups:/backups
+      - /Users/gustavosilva/workspace:/source # place where my files and data to back it up
+    ports:
+      - 8200:8200
