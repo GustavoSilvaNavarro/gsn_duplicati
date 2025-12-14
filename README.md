@@ -6,8 +6,8 @@ This repository contains a Docker Compose setup for running [Duplicati](https://
 
 Duplicati is configured to:
 - Run as a Docker container using the LinuxServer.io image
-- Store configuration in `./config`
-- Store backup files in `./backups`
+- Store configuration in `./duplicati/config`
+- Store backup files in `./duplicati/backups`
 - Backup files from `/Users/gustavosilva/workspace` (mounted as `/source` in the container)
 - Access the web interface on port `8200`
 
@@ -65,7 +65,7 @@ Choose where you want to store your backups. Duplicati supports many destination
 
 **Example - Local Backup:**
 - Select **"Local folder or drive"**
-- Path: `/backups/my-backup` (this maps to `./backups/my-backup` on your host)
+- Path: `/backups/my-backup` (this maps to `./duplicati/backups/my-backup` on your host)
 
 **Example - AWS S3:**
 - Select **"S3 Compatible"** or **"Amazon S3"**
@@ -148,7 +148,7 @@ Yes, you can absolutely backup data on one computer and restore it on another! T
    - Run your backup
 
 2. **Export Backup Files:**
-   - If backing up to local folder (`/backups`), the backup files will be in `./backups/` on your host
+   - If backing up to local folder (`/backups`), the backup files will be in `./duplicati/backups/` on your host
    - Copy the entire backup folder to an external drive, USB stick, or cloud storage
    - **Important:** Copy ALL files in the backup folder (`.dlist.zip.aes`, `.dblock.zip.aes`, etc.)
 
@@ -162,7 +162,7 @@ Yes, you can absolutely backup data on one computer and restore it on another! T
    - Access the web interface at `http://localhost:8200`
 
 2. **Copy Backup Files to Restore Folder:**
-   - Copy all backup files from Computer A to the `./restore` folder on Computer B
+   - Copy all backup files from Computer A to the `./duplicati/restores` folder on Computer B
    - The files will be accessible at `/restore` inside the container
 
 3. **Restore Using Direct Restore:**
@@ -206,7 +206,7 @@ Yes, you can absolutely backup data on one computer and restore it on another! T
 
 ### Restore Folder Usage
 
-The `./restore` folder is mounted at `/restore` in the container. This is a convenient place to:
+The `./duplicati/restores` folder is mounted at `/restore` in the container. This is a convenient place to:
 - Drop backup files you've copied from another computer
 - Store backup files you want to restore later
 - Organize multiple backup sets for restoration
@@ -214,7 +214,7 @@ The `./restore` folder is mounted at `/restore` in the container. This is a conv
 **Example Workflow:**
 ```bash
 # On Computer B, after copying backup files
-./restore/
+./duplicati/restores/
   └── my-backup/
       ├── duplicati-20251214T014341Z.dlist.zip.aes
       ├── duplicati-20251214T014341Z.dblock.zip.aes
@@ -234,9 +234,9 @@ Then in Duplicati, use path `/restore/my-backup` for direct restore.
 
 ### Volume Mounts
 
-- `./config:/config`: Duplicati configuration and database
-- `./backups:/backups`: Local backup storage location
-- `./restore:/restore`: Restore folder - place backup files here to restore on another computer
+- `./duplicati/config:/config`: Duplicati configuration and database
+- `./duplicati/backups:/backups`: Local backup storage location
+- `./duplicati/restores:/restore`: Restore folder - place backup files here to restore on another computer
 - `/Users/gustavosilva/workspace:/source`: Source files to backup
 
 ### Ports

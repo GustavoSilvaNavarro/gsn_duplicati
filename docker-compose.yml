@@ -11,9 +11,9 @@ services:
       - SETTINGS_ENCRYPTION_KEY=superSecretPasswordShhhhh
       - DUPLICATI__WEBSERVICE_PASSWORD=password
     volumes:
-      - ./config:/config
-      - ./backups:/backups
-      - ./restore:/restore # folder to drop backup files for restoring on another computer
+      - ./duplicati/config:/config
+      - ./duplicati/backups:/backups
+      - ./duplicati/restores:/restore # folder to drop backup files for restoring on another computer
       - /Users/gustavosilva/workspace:/source # place where my files and data to back it up
     ports:
       - 8200:8200
