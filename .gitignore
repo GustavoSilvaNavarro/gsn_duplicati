@@ -1,6 +1,10 @@
 .vscode/settings.json
-backups/
-config/
-restore/
+# Ignore all contents in these folders, but keep the folders themselves
+backups/*
+!backups/.gitkeep
+config/*
+!config/.gitkeep
+restore/*
+!restore/.gitkeep
 .qodo
 .DS_Store
