@@ -11,3 +11,6 @@ build:
 run:
 	@echo "🚀 Starting duplicati service..."
 	docker compose up -d
+
+down-rm:
+	docker compose -f ./docker-compose.yml down --remove-orphans --rmi all --volumes
