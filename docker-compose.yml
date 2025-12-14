@@ -1,4 +1,5 @@
 services:
+  # Service to do backups and schedule backups
   duplicati:
     image: lscr.io/linuxserver/duplicati:latest
     container_name: duplicati

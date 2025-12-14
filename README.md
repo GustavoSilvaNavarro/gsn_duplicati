@@ -317,4 +317,3 @@ docker compose ps
 ## License
 
 This setup uses Duplicati, which is licensed under LGPL.
-
